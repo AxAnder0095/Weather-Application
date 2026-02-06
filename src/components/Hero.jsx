@@ -1,7 +1,10 @@
+import { Navbar } from './Navbar.jsx'
+
 export const Hero = () => {
     return (
-        <div>
-            <h1>Hero Component</h1>
-        </div>
+        <header className='hero'>
+            <div className='hero-overlay'/>
+            <Navbar />
+        </header>
     )
 }

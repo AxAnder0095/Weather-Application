@@ -1,10 +1,18 @@
-:root {
-  font-size: 14px;
-  font-family: 'inter', sans-serif;
-}
-
-body, html {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
+:root {
+  font-size: 14px;
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+}
+
+/* #root {
+  min-height: 100vh;
+} */
