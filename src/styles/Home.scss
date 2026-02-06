@@ -1,13 +1,119 @@
 .home {
-    // padding: 5rem 5rem;
-    // border: 1px solid #fff;
+    // border: 1px solid white;
+    width: 100%;
+    max-width: 1920px;
+    display: flex;
+    justify-content: center;
 }
 
 .home-content {
-    border: 1px solid white;
-    // display: grid;
-    // grid-template-columns: repeat(10, minmax(0, 1fr));
-    // grid-template-rows: repeat(8, minmax(0, 100px));
-    // gap: 1rem;
+    // border: 1px solid white;
+    width: 100%;
+    max-width: 1200px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.top {
+    color: black;
+    padding: 2rem ;
+    background-color: rgba($color: #FFFFFF, $alpha: 0.5);
+    border-radius: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.current-date {
+    display: flex;
+    align-items: center;
+    font-size: 1.3rem;
+    color:rgba($color: #000000, $alpha: 0.5)
+}
+
+.search-container {
+    display: flex;
+    gap: 0.5rem;
+    // border: 1px solid white;
     
+
+    .city-search, .search-button {
+        padding: 1rem;
+        border-radius: 1rem;
+        border: none;
+    }
+
+    .city-search {
+        width: 600px;
+        background-color: rgba($color: #FFFFFF, $alpha: 0.7);
+    }
+
+    .search-button {
+        background-color: rgba($color: #407cff, $alpha: 0.8);
+        color: white;
+        cursor: pointer;
+        transition: 200ms ease-in-out;
+
+        &:hover {
+            background-color: rgba($color: #0036aa, $alpha: 1);
+            transition: 200ms ease-in-out;
+        }
+    }
+}
+
+
+
+.main-top {
+    // border: 1px solid white;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+
+    .main-top-left,
+    .main-top-right {
+        // border: 1px solid white;
+        background-color: rgba($color: #FFFFFF, $alpha: 0.5);
+        border-radius: 1rem;
+        padding: 2rem;
+    }
+
+    .main-top-right {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+
+        .misc-data {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 1rem;
+
+            .box {
+                height: 100px;
+                width: 100px;
+                background-color: rgba($color: #FFFFFF, $alpha: 0.5);
+                padding: 1rem;
+                border-radius: 1rem;
+            }
+        }
+    }
+}
+
+.main-middle {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+
+    .hourly-forecast-container {
+        // border: 1px solid white;
+        background-color: rgba($color: #FFFFFF, $alpha: 0.5);
+        border-radius: 1rem;
+        padding: 2rem;
+    }
 }

@@ -4,17 +4,52 @@ import { Icons } from '../icons/Icons.jsx';
 export const Home = () => {
     return (
         <div className='home'>
-            <main className='home-content'>
-                
-            </main>
+            <div className='home-content'>
+                <header className='top'>
+                    <p className='current-date'>5 Feb, 2026</p>
+                    <div className='search-container'>
+                        <input
+                            type='text'
+                            placeholder='Search for a city...'
+                            className='city-search'
+                        />
+                        <button className='search-button'>
+                            Search
+                        </button>
+                    </div>
+                </header>
+                <main className='main'>
+                    <section className='main-top'>
+                        <div className='main-top-left'>word</div>
+                        <div className='main-top-right'>
+                            <div className='misc-data'>
+                                <div className='box'>placeholder</div>
+                                <div className='box'>placeholder</div>
+                                <div className='box'>placeholder</div>
+                                <div className='box'>placeholder</div>
+                                <div className='box'>placeholder</div>
+                                <div className='box'>placeholder</div>
+                                <div className='box'>placeholder</div>
+                                <div className='box'>placeholder</div>
+                            </div>
+                        </div>
+                    </section>
+                    <section className='main-middle'>
+                        <div className='hourly-forecast-container'>
+                            <div className='hourly-forecast'>
+                                <p>Hourly forecast</p>
+                            </div>
+                        </div>
+                    </section>
+                    <section className='main-bottom'>
+                        <div className='daily-forecast-container'>
+                            <div>
+                                <p>Daily forecast</p>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+            </div>
         </div>
     )
 };
-
-
-
-// <p className='current-subtext'>MONDAY</p>
-//                         <p className='current-maintext'>AURORA</p>
-//                         <p className='current-subtext'>5 FEB, 2026</p>
-//                         <p className='current-maintext'>15 &deg;F</p>
-//                         <p className='current-subtext'>HIGH: 22 &deg;F LOW: 14 &deg;F</p>
