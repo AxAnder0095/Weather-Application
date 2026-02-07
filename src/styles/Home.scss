@@ -1,5 +1,4 @@
 .home {
-    // border: 1px solid white;
     width: 100%;
     max-width: 1920px;
     display: flex;
@@ -7,7 +6,6 @@
 }
 
 .home-content {
-    // border: 1px solid white;
     width: 100%;
     max-width: 1200px;
     padding: 2rem;
@@ -22,26 +20,37 @@
     gap: 1rem;
 }
 
-
+// ================================================================
+// All data pertaining to the current weather conditions
+// ================================================================
 .main-top {
-    // border: 1px solid white;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
 
     .main-top-left,
     .main-top-right {
-        // border: 1px solid white;
         background-color: rgba($color: #FFFFFF, $alpha: 0.5);
         border-radius: 1rem;
         padding: 2rem;
+    }
+
+    .main-top-left {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .weather-main-icon {
+            width: 250px;
+            height: 250px;
+        }
     }
 
     .main-top-right {
         display: flex;
         justify-content: center;
         align-items: center;
-        
+
 
         .misc-data {
             display: grid;
@@ -51,8 +60,6 @@
             .box {
                 height: 120px;
                 width: 120px;
-                // background-color: rgba($color: #407cff, $alpha: 0.6);
-                // background: linear-gradient(to right, #8fb2ff 0%, #407cff 100%);
                 background: linear-gradient(#8fb2ff 0%, #407cff 100%);
                 padding: 0.8rem;
                 border-radius: 1rem;
@@ -60,7 +67,7 @@
                 transition: 200ms ease-in-out;
 
                 &:hover {
-                    background: linear-gradient( #407cff 0%, #407cff 100%);
+                    background: linear-gradient(#407cff 0%, #407cff 100%);
                     transition: 200ms ease-in-out;
                 }
             }
@@ -68,20 +75,55 @@
     }
 }
 
+// .current-temp-container {
+//     // border: 1px solid white;
+// }
+
+.current-temp {
+    // border: 1px solid white;
+    display: flex;
+}
+
+.main-icon,
+.main-temp {
+    // border: 1px solid white;
+    display: flex;
+    align-items: center;
+}
+
+.main-temp {
+    font-size: 3rem;
+    font-weight: bold;
+    color: rgba($color: #000000, $alpha: 0.6)
+}
+
+.main-description {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: rgba($color: #000000, $alpha: 0.6);
+    text-transform: capitalize;
+}
+
+.sub-description {
+    font-size: 1rem;
+    color: rgba($color: #000000, $alpha: 0.5);
+    text-transform: capitalize;
+}
+
+
 .misc {
     display: flex;
     gap: 0.2rem;
 
 }
 
+
 .weather-title {
-    // border: 1px solid white;
     display: flex;
     height: 40%
 }
 
 .weather-icon {
-    // border: 1px solid white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -91,14 +133,56 @@
 
 }
 
+// ================================================================
+// All data pertaining to the hourly forecast
+// ================================================================
 .main-middle {
     display: grid;
     grid-template-columns: repeat(1, minmax(0, 1fr));
+    background-color: rgba($color: #FFFFFF, $alpha: 0.5);
+    border-radius: 1rem;
+    padding: 2rem;
 
     .hourly-forecast-container {
-        // border: 1px solid white;
-        background-color: rgba($color: #FFFFFF, $alpha: 0.5);
-        border-radius: 1rem;
-        padding: 2rem;
+
+        display: flex;
+        gap: 1rem;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+
+        .hourly-forecast-box {
+            flex: 0 0 auto;
+            min-width: 120px;
+            scroll-snap-align: start;
+            padding: 0 1rem;
+        }
+    }
+}
+
+// ================================================================
+// All data pertaining to the daily forecast
+// ================================================================
+
+.main-bottom {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    background-color: rgba($color: #FFFFFF, $alpha: 0.5);
+    border-radius: 1rem;
+    padding: 2rem;
+
+    .daily-forecast-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid white;
+
+        .daily-forecast-wrapper {
+            display: grid;
+            grid-template-columns: repeat(8, minmax(0, 1fr));
+            gap: 0.5rem;
+            width: 100%;
+        }
     }
 }

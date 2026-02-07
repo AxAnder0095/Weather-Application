@@ -4,8 +4,6 @@ import { Icons } from '../icons/Icons.jsx';
 import { SearchBar } from '../components/SearchBar.jsx';
 
 export const Home = () => {
-    const none = 0;
-
     const [search, setSearch] = useState('');
     const [cityWeather, setCityWeather] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -68,6 +66,13 @@ export const Home = () => {
         await getCityWeather(search.trim());
     };
 
+    const iconCode = cityWeather?.current?.weather?.[0]?.icon;
+    const iconDescription = cityWeather?.current?.weather?.[0]?.description;
+    const mainDescription = cityWeather?.current?.weather?.[0]?.main;
+
+    const hourtlyForecast = cityWeather?.hourly || [];
+    const dailyForecast = cityWeather?.daily || [];
+
     return (
         <div className='home'>
             <div className='home-content'>
@@ -80,16 +85,41 @@ export const Home = () => {
                 />
                 <main className='main'>
                     <section className='main-top'>
-                        <div className='main-top-left'>{cityWeather ? `${cityWeather.current.temp.toFixed(none)}°F` : 'No data'}</div>
+                        <div className='main-top-left'>
+                            <div className='current-temp-container'>
+                                <div className='current-temp'>
+                                    <span className='main-icon'>
+                                        {iconCode ? (
+                                            <img
+                                                src={`https://openweathermap.org/img/wn/${iconCode}@4x.png`}
+                                                alt={iconDescription || 'Current weather'}
+                                                className='weather-main-icon'
+                                            />
+                                        ) : null}
+                                    </span>
+                                    <span className='main-temp'>
+                                        <div>
+                                            <div>
+                                                {cityWeather ? `${cityWeather.current.temp.toFixed(0)}°F` : 'No data'}
+                                            </div>
+                                            <div>
+                                                <p className='main-description'>{mainDescription}</p>
+                                                <p className='sub-description'>{iconDescription}</p>
+                                            </div>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                         <div className='main-top-right'>
                             <div className='misc-data'>
                                 <div className='box'>
                                     <div className='weather-title'>{cityWeather ? (<span className='misc'>{Icons.feelsLike} Feels Like</span>) : 'No data'}</div>
-                                    <div className='weather-icon'>{cityWeather ? `${cityWeather.current.feels_like.toFixed(none)}°F` : null}</div>
+                                    <div className='weather-icon'>{cityWeather ? `${cityWeather.current.feels_like.toFixed(0)}°F` : null}</div>
                                 </div>
                                 <div className='box'>
                                     <div className='weather-title'>{cityWeather ? (<span className='misc'>{Icons.dewPoint} Dew Point</span>) : 'No data'}</div>
-                                    <div className='weather-icon'>{cityWeather ? `${cityWeather.current.dew_point.toFixed(none)}°F` : null}</div>
+                                    <div className='weather-icon'>{cityWeather ? `${cityWeather.current.dew_point.toFixed(0)}°F` : null}</div>
                                 </div>
                                 <div className='box'>
                                     <div className='weather-title'>{cityWeather ? (<span className='misc'>{Icons.visibility} Visibility</span>) : 'No data'}</div>
@@ -101,7 +131,7 @@ export const Home = () => {
                                 </div>
                                 <div className='box'>
                                     <div className='weather-title'>{cityWeather ? (<span className='misc'>{Icons.windSpeed} Wind Speed</span>) : 'No data'}</div>
-                                    <div className='weather-icon'>{cityWeather ? `${cityWeather.current.wind_speed.toFixed(none)} mph` : null}</div>
+                                    <div className='weather-icon'>{cityWeather ? `${cityWeather.current.wind_speed.toFixed(0)} mph` : null}</div>
                                 </div>
                                 <div className='box'>
                                     <div className='weather-title'>{cityWeather ? (<span className='misc'>{Icons.windDegree} Wind Degree</span>) : 'No data'}</div>
@@ -120,15 +150,21 @@ export const Home = () => {
                     </section>
                     <section className='main-middle'>
                         <div className='hourly-forecast-container'>
-                            <div className='hourly-forecast'>
-                                <p>Hourly forecast</p>
-                            </div>
+                            {hourtlyForecast.map((hour, index) => (
+                                <div key={index} className='hourly-forecast-box'>
+                                    <div className='hourly-forecast-time'>{new Date(hour.dt * 1000).toLocaleTimeString([], { hour: '2-digit'})}</div>
+                                </div>
+                            ))}
                         </div>
                     </section>
                     <section className='main-bottom'>
                         <div className='daily-forecast-container'>
-                            <div>
-                                <p>Daily forecast</p>
+                            <div className='daily-forecast-wrapper'>
+                                {dailyForecast.map((day, index) => (
+                                <div key={index} className='daily-forecast-box'>
+                                    <div className='daily-forecast-date'>{new Date(day.dt * 1000).toLocaleDateString([], { weekday: 'short', day: 'numeric' })}</div>
+                                </div>
+                            ))}
                             </div>
                         </div>
                     </section>
