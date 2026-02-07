@@ -75,10 +75,6 @@
     }
 }
 
-// .current-temp-container {
-//     // border: 1px solid white;
-// }
-
 .current-temp {
     // border: 1px solid white;
     display: flex;
@@ -117,7 +113,6 @@
 
 }
 
-
 .weather-title {
     display: flex;
     height: 40%
@@ -147,16 +142,51 @@
 
         display: flex;
         gap: 1rem;
+        padding: 1rem 0;
+
+        // Scrollbar styling
         overflow-x: auto;
         overflow-y: hidden;
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
 
+        scrollbar-width: thin;
+        scrollbar-color: rgba(64, 124, 255, 0.7) rgba(255, 255, 255, 0.25);
+
+        &::-webkit-scrollbar {
+            height: 10px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 999px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: linear-gradient(90deg, rgba(143, 178, 255, 0.9) 0%, rgba(64, 124, 255, 0.9) 100%);
+            border-radius: 999px;
+            border: 2px solid rgba(255, 255, 255, 0.35);
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(90deg, rgba(64, 124, 255, 0.95) 0%, rgba(64, 124, 255, 0.95) 100%);
+        }
+
         .hourly-forecast-box {
             flex: 0 0 auto;
             min-width: 120px;
             scroll-snap-align: start;
-            padding: 0 1rem;
+
+            background: linear-gradient(#8fb2ff 0%, #407cff 100%);
+            padding: 0.8rem;
+            border-radius: 1rem;
+            color: rgba($color: #ffffff, $alpha: 0.8);
+            transition: 200ms ease-in-out;
+
+            &:hover {
+                background: linear-gradient(#407cff 0%, #407cff 100%);
+                transition: 200ms ease-in-out;
+            }
         }
     }
 }
@@ -176,13 +206,37 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        border: 1px solid white;
 
         .daily-forecast-wrapper {
             display: grid;
             grid-template-columns: repeat(8, minmax(0, 1fr));
             gap: 0.5rem;
             width: 100%;
+
+            .daily-forecast-box {
+                background: linear-gradient(#8fb2ff 0%, #407cff 100%);
+                padding: 0.8rem;
+                border-radius: 1rem;
+                color: rgba($color: #ffffff, $alpha: 0.8);
+                transition: 200ms ease-in-out;
+
+                &:hover {
+                    background: linear-gradient(#407cff 0%, #407cff 100%);
+                    transition: 200ms ease-in-out;
+                }
+
+                .daily-forecast-date {
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 1.1rem;
+                    font-weight: bold;
+                }
+            }
         }
     }
+}
+
+.daily-forecast-highlow {
+    display: flex;
+    justify-content: space-between;
 }

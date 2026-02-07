@@ -14,24 +14,8 @@ export const Home = () => {
             setIsLoading(true);
             setError('');
 
-            const apiKey = import.meta.env.VITE_OPENWEATHER_API_KEY;
-            if (!apiKey) {
-                throw new Error('Missing API key. Set VITE_OPENWEATHER_API_KEY in .env.');
-            }
-
-            const geoResponse = await fetch(
-                `http://api.openweathermap.org/geo/1.0/zip?zip=${zipCode},US&appid=${apiKey}`
-            );
-            const geoData = await geoResponse.json();
-
-            if (!geoResponse.ok) {
-                throw new Error(geoData?.message || 'Unable to find that zip code.');
-            }
-
-            // console.log('Geocoding data:', geoData);
-
             const weatherResponse = await fetch(
-                `https://api.openweathermap.org/data/3.0/onecall?lat=${geoData.lat}&lon=${geoData.lon}&units=imperial&appid=${apiKey}`
+                `/api/weather?zip=${encodeURIComponent(zipCode)}`
             );
             const weatherData = await weatherResponse.json();
 
@@ -152,7 +136,17 @@ export const Home = () => {
                         <div className='hourly-forecast-container'>
                             {hourtlyForecast.map((hour, index) => (
                                 <div key={index} className='hourly-forecast-box'>
-                                    <div className='hourly-forecast-time'>{new Date(hour.dt * 1000).toLocaleTimeString([], { hour: '2-digit'})}</div>
+                                    <div className='hourly-forecast-time'>{new Date(hour.dt * 1000).toLocaleTimeString([], { hour: '2-digit' })}</div>
+                                    <div>
+                                        {hour.weather?.[0]?.icon ? (
+                                            <img
+                                                src={`https://openweathermap.org/img/wn/${hour.weather[0].icon}@2x.png`}
+                                                alt={hour.weather[0].description}
+                                                className='daily-weather-icon'
+                                            />
+                                        ) : null}
+                                    </div>
+                                    <div className='hourly-forecast-temp'>{`${hour.temp.toFixed(0)}°F`}</div>
                                 </div>
                             ))}
                         </div>
@@ -161,10 +155,32 @@ export const Home = () => {
                         <div className='daily-forecast-container'>
                             <div className='daily-forecast-wrapper'>
                                 {dailyForecast.map((day, index) => (
-                                <div key={index} className='daily-forecast-box'>
-                                    <div className='daily-forecast-date'>{new Date(day.dt * 1000).toLocaleDateString([], { weekday: 'short', day: 'numeric' })}</div>
-                                </div>
-                            ))}
+                                    <div key={index} className='daily-forecast-box'>
+                                        <div className='daily-forecast-date'>
+                                            <div>
+                                                {new Date(day.dt * 1000).toLocaleDateString([], { weekday: 'short' })}
+                                            </div>
+                                            <div>
+                                                {new Date(day.dt * 1000).toLocaleDateString([], { day: 'numeric' })}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div>
+                                                {day.weather?.[0]?.icon ? (
+                                                    <img
+                                                        src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`}
+                                                        alt={day.weather[0].description}
+                                                        className='daily-weather-icon'
+                                                    />
+                                                ) : null}
+                                            </div>
+                                            <div className='daily-forecast-highlow'>
+                                                <div className='daily-forecast-min'>{`${day.temp.min.toFixed(0)}°F`}</div>
+                                                <div className='daily-forecast-max'>{`${day.temp.max.toFixed(0)}°F`}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </section>
