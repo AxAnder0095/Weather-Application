@@ -1,5 +1,5 @@
 import '../styles/Home.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Icons } from '../icons/Icons.jsx';
 import { SearchBar } from '../components/SearchBar.jsx';
 
@@ -8,6 +8,11 @@ export const Home = () => {
     const [cityWeather, setCityWeather] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
+    const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '');
+
+    useEffect(() => {
+        console.log('VITE_API_BASE_URL:', apiBaseUrl || '(empty)');
+    }, [apiBaseUrl]);
 
     const getCityWeather = async (zipCode) => {
         try {
@@ -15,7 +20,7 @@ export const Home = () => {
             setError('');
 
             const weatherResponse = await fetch(
-                `/api/weather?zip=${encodeURIComponent(zipCode)}`
+                `${apiBaseUrl}/api/weather?zip=${encodeURIComponent(zipCode)}`
             );
             const weatherData = await weatherResponse.json();
 
